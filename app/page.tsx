@@ -56,14 +56,16 @@ export default function Page() {
     {
       name: 'Alpha Session',
       price: '$189',
-      description:
-        'A 90-minute mobile bodywork session focused on helping the body downshift from chronic tension and persistent stress activation.',
+      description: 'Regulates the nervous system',
+      focus: 'calming, downshifting, safety',
+      experience: 'gentle, rhythmic, restorative',
     },
     {
       name: 'Omega Session',
       price: '$225',
-      description:
-        'A 90-minute mobile bodywork session designed for deeper nervous system support, tension relief, and grounded decompression.',
+      description: 'Releases stored tension in the body',
+      focus: 'depth, structure, physical reset',
+      experience: 'slow, deliberate, therapeutic',
     },
   ];
 
@@ -458,7 +460,11 @@ export default function Page() {
                     {session.price}
                   </span>
                 </div>
-                <p className="mt-4 leading-7 text-slate-600">{session.description}</p>
+                <ul className="mt-4 space-y-2 leading-7 text-slate-600">
+                  <li>→ {session.description}</li>
+                  <li>→ Focus: {session.focus}</li>
+                  <li>→ Experience: {session.experience}</li>
+                </ul>
               </div>
             ))}
           </div>
