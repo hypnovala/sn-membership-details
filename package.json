@@ -11,7 +11,8 @@
   "dependencies": {
     "next": "14.2.33",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "nodemailer": "^6.9.16"
   },
   "devDependencies": {
     "@types/node": "20.17.30",
@@ -20,6 +21,7 @@
     "autoprefixer": "10.4.21",
     "postcss": "8.5.6",
     "tailwindcss": "3.4.17",
-    "typescript": "5.8.3"
+    "typescript": "5.8.3",
+    "@types/nodemailer": "^6.4.15"
   }
 }
