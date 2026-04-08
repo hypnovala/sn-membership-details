@@ -1,61 +1,53 @@
-import nodemailer from 'nodemailer';
-import { expect } from 'chai';
+import request from 'supertest';
+import app from '../../app';  // Assuming you have an app file that initializes your express app
 
-describe('Nodemailer Responses', () => {
-    it('should send email successfully', async () => {
-        const transporter = nodemailer.createTransport({
-            host: 'smtp.example.com',
-            port: 587,
-            secure: false,
-            auth: {
-                user: 'user@example.com',
-                pass: 'password',
-            },
-        });
+jest.mock('nodemailer');
 
-        const mailOptions = {
-            from: 'sender@example.com',
-            to: 'recipient@example.com',
-            subject: 'Test Email',
-            text: 'Hello, this is a test email!',
-        };
+describe('POST /api/waitlist', () => {
+  it('should return 200 for a valid email', async () => {
+    const response = await request(app)
+      .post('/api/waitlist')
+      .send({ email: 'test@example.com' });
+    expect(response.status).toBe(200);
+    expect(response.body.message).toEqual('Success: Email sent.');
+  });
 
-        const info = await transporter.sendMail(mailOptions);
+  it('should return 400 for an invalid email format', async () => {
+    const response = await request(app)
+      .post('/api/waitlist')
+      .send({ email: 'invalid-email' });
+    expect(response.status).toBe(400);
+    expect(response.body.message).toEqual('Error: Invalid email format.');
+  });
 
-        expect(info).to.have.property('messageId');
-        expect(info.messageId).to.exist;
-        expect(info).to.have.property('envelope');
-        expect(info.envelope).to.include({
-            from: 'sender@example.com',
-            to: 'recipient@example.com',
-        });
-    });
+  it('should return 400 for a missing email payload', async () => {
+    const response = await request(app)
+      .post('/api/waitlist')
+      .send({});
+    expect(response.status).toBe(400);
+    expect(response.body.message).toEqual('Error: Email is required.');
+  });
 
-    it('should return an error for invalid email', async () => {
-        const transporter = nodemailer.createTransport({
-            // Configuration with invalid details
-            host: 'smtp.example.com',
-            port: 587,
-            secure: false,
-            auth: {
-                user: 'invaliduser',
-                pass: 'invalidpassword',
-            },
-        });
+  it('should return 500 for missing environment variables', async () => {
+    jest.resetModules(); // Clear any cached modules
+    delete process.env.EMAIL_SERVICE;
+    const response = await request(app)
+      .post('/api/waitlist')
+      .send({ email: 'test@example.com' });
+    expect(response.status).toBe(500);
+    expect(response.body.message).toEqual('Error: Environment variables are not configured properly.');
+  });
 
-        const mailOptions = {
-            from: 'sender@example.com',
-            to: 'invalidemail', // Invalid email format
-            subject: 'Test Email',
-            text: 'This should fail!',
-        };
+  it('should return 500 on nodemailer sending error', async () => {
+    const nodemailer = require('nodemailer');
+    nodemailer.createTransport.mockImplementation(() => ({
+      sendMail: jest.fn().mockRejectedValue(new Error('Error sending email'))
+    }));
 
-        try {
-            await transporter.sendMail(mailOptions);
-            expect.fail('Expected an error to be thrown!');
-        } catch (error) {
-            expect(error).to.exist;
-            expect(error).to.have.property('response');
-        }
-    });
+    const response = await request(app)
+      .post('/api/waitlist')
+      .send({ email: 'test@example.com' });
+    expect(response.status).toBe(500);
+    expect(response.body.message).toEqual('Error: Error sending email.');
+  });
 });
