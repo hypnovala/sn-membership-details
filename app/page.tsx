@@ -1,4 +1,4 @@
-import Image from "next/image";
+import WaitlistForm from "./components/WaitlistForm";
 
 export default function Page() {
   const benefits = [
@@ -478,55 +478,7 @@ export default function Page() {
               Clean, simple waitlist section ready for your email platform embed or form action.
             </p>
 
-            <form className="mt-8 space-y-5" action="#" method="post">
-              <div>
-                <label htmlFor="first-name" className="mb-2 block text-sm font-medium text-slate-700">
-                  First name
-                </label>
-                <input
-                  id="first-name"
-                  name="firstName"
-                  type="text"
-                  placeholder="Your first name"
-                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-4 focus:ring-slate-100"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="mb-2 block text-sm font-medium text-slate-700">
-                  Email address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-4 focus:ring-slate-100"
-                />
-              </div>
-              <div>
-                <label htmlFor="houston" className="mb-2 block text-sm font-medium text-slate-700">
-                  Are you in Houston?
-                </label>
-                <select
-                  id="houston"
-                  name="houstonStatus"
-                  className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-slate-500 focus:ring-4 focus:ring-slate-100"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Choose an option
-                  </option>
-                  <option>Yes, I am in Houston</option>
-                  <option>No, I want digital membership only</option>
-                </select>
-              </div>
-              <button
-                type="submit"
-                className="w-full rounded-2xl bg-emerald-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-emerald-200 transition hover:-translate-y-0.5 hover:bg-emerald-600"
-              >
-                Join Waitlist
-              </button>
-            </form>
+            <WaitlistForm />
 
             <p className="mt-5 text-sm leading-6 text-slate-500">
               Education only • Not medical advice • Consult a qualified health professional for medical concerns
