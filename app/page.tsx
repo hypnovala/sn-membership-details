@@ -345,46 +345,26 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 md:px-10 lg:py-24">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-12">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Brock Somatic Check-In App</p>
-            <h3 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl">
-              A daily bridge between stress and support
-            </h3>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-              The app gives core members a practical daily support layer before moving into deeper membership teaching, body awareness work, and premium support pathways.
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {[
-                'Daily self check-in support',
-                'Body awareness tracking',
-                'Stress pattern visibility',
-                'Simple next-step guidance',
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-medium text-slate-700"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
+      <section className="mx-auto max-w-5xl px-6 py-16 md:px-10 lg:py-24">
+        <div className="rounded-[2.5rem] bg-[#211043] p-6 shadow-[0_24px_70px_rgba(12,6,28,0.45)] md:p-10 lg:p-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#c6bbef]">BROCK SOMATIC CHECK-IN APP</p>
+          <h3 className="mt-5 max-w-3xl font-serif text-4xl font-semibold leading-[1.06] tracking-tight text-[#f3edff] md:text-6xl">
+            A daily bridge between
+            <br />
+            stress and support
+          </h3>
+          <p className="mt-6 max-w-3xl text-lg leading-9 text-[#ddd3f5] md:text-[1.65rem] md:leading-[1.8]">
+            The app gives core members a practical daily support layer before moving into the deeper identity work and premium support pathways.
+          </p>
 
-          <div className="rounded-[2.25rem] bg-[#24104f] p-6 shadow-2xl shadow-slate-300 md:p-8">
-            <div className="rounded-[1.75rem] border border-dashed border-white/30 bg-white/10 p-6 md:p-8">
-              <div className="rounded-[1.5rem] bg-white/5 p-6 md:p-10">
-                <figure className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#46357d]">
-                  <Image
-                    src="/image01_app.png"
-                    alt="App preview"
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1024px) 40vw, 100vw"
-                    priority
-                  />
-                </figure>
+          <div className="mt-10 rounded-[2rem] border border-dashed border-[#aea0d8]/60 bg-[#4b3f78] p-4 md:mt-12 md:p-6">
+            <div className="rounded-[1.7rem] bg-[#1a2a4a] p-3 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05),0_14px_34px_rgba(13,8,28,0.45)] md:p-5">
+              <div className="overflow-hidden rounded-[1.35rem] bg-[#132340]">
+                <img
+                  src="/image01_app.png"
+                  alt="Brock Somatic Check-In App preview"
+                  className="h-auto w-full object-cover"
+                />
               </div>
             </div>
           </div>
