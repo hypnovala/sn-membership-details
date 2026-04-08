@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Page() {
   const benefits = [
     {
@@ -373,15 +375,15 @@ export default function Page() {
           <div className="rounded-[2.25rem] bg-[#24104f] p-6 shadow-2xl shadow-slate-300 md:p-8">
             <div className="rounded-[1.75rem] border border-dashed border-white/30 bg-white/10 p-6 md:p-8">
               <div className="rounded-[1.5rem] bg-white/5 p-6 md:p-10">
-                <figure className="flex aspect-[4/5] items-center justify-center rounded-[1.5rem] border border-white/10 bg-[#46357d] text-center">
-                  <figcaption className="max-w-sm px-6 text-white/90">
-                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-pink-100/90">App preview</p>
-                    <h4 className="mt-4 text-2xl font-semibold leading-tight md:text-3xl">Image placeholder</h4>
-                    <p className="mt-4 text-base leading-7 text-white/80 md:text-lg">
-                      Upload your Brock Somatic Check-In App screenshot to replace this preview block.
-                    </p>
-                    <p className="sr-only">Placeholder image area for Brock Somatic Check-In App preview.</p>
-                  </figcaption>
+                <figure className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#46357d]">
+                  <Image
+                    src="/image01_app.png"
+                    alt="App preview"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    priority
+                  />
                 </figure>
               </div>
             </div>
