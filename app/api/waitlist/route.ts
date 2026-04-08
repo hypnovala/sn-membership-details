@@ -39,6 +39,15 @@ const wasAccepted = (result: SendMailResult, expectedRecipient: string): boolean
   return result.accepted.some((recipient) => recipient.trim().toLowerCase() === normalizedRecipient);
 };
 
+export async function GET() {
+  return NextResponse.json(
+    {
+      message: "Waitlist endpoint is live. Send a POST request with firstName, email, and inHouston.",
+    },
+    { status: 200 },
+  );
+}
+
 export async function POST(req: Request) {
   try {
     const body: unknown = await req.json();
