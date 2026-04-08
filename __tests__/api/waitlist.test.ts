@@ -1,53 +1,49 @@
-import request from 'supertest';
-import app from '../../app';  // Assuming you have an app file that initializes your express app
+import { sendEmail } from '../path/to/your/nodemailer/module';
 
-jest.mock('nodemailer');
+describe('Email Sending Tests', () => {
+    test('should send email successfully', async () => {
+        const response = await sendEmail({
+            to: 'test@example.com',
+            subject: 'Test Email',
+            text: 'This is a test email.'
+        });
+        expect(response).toBeDefined();
+        expect(response.accepted).toContain('test@example.com');
+    });
 
-describe('POST /api/waitlist', () => {
-  it('should return 200 for a valid email', async () => {
-    const response = await request(app)
-      .post('/api/waitlist')
-      .send({ email: 'test@example.com' });
-    expect(response.status).toBe(200);
-    expect(response.body.message).toEqual('Success: Email sent.');
-  });
+    test('should handle errors during sending', async () => {
+        await expect(sendEmail({
+            to: 'invalid-email',
+            subject: 'Test Email',
+            text: 'This should fail.'
+        })).rejects.toThrow('Invalid email');
+    });
 
-  it('should return 400 for an invalid email format', async () => {
-    const response = await request(app)
-      .post('/api/waitlist')
-      .send({ email: 'invalid-email' });
-    expect(response.status).toBe(400);
-    expect(response.body.message).toEqual('Error: Invalid email format.');
-  });
+    test('should validate email addresses correctly', async () => {
+        await expect(sendEmail({
+            to: '',
+            subject: 'Validation Test',
+            text: 'Invalid email test.'
+        })).rejects.toThrow('Validation Error');
+    });
 
-  it('should return 400 for a missing email payload', async () => {
-    const response = await request(app)
-      .post('/api/waitlist')
-      .send({});
-    expect(response.status).toBe(400);
-    expect(response.body.message).toEqual('Error: Email is required.');
-  });
+    test('should send email to multiple recipients', async () => {
+        const response = await sendEmail({
+            to: ['test1@example.com', 'test2@example.com'],
+            subject: 'Group Email',
+            text: 'This is a group test email.'
+        });
+        expect(response).toBeDefined();
+        expect(response.accepted).toEqual(expect.arrayContaining(['test1@example.com', 'test2@example.com']));
+    });
 
-  it('should return 500 for missing environment variables', async () => {
-    jest.resetModules(); // Clear any cached modules
-    delete process.env.EMAIL_SERVICE;
-    const response = await request(app)
-      .post('/api/waitlist')
-      .send({ email: 'test@example.com' });
-    expect(response.status).toBe(500);
-    expect(response.body.message).toEqual('Error: Environment variables are not configured properly.');
-  });
-
-  it('should return 500 on nodemailer sending error', async () => {
-    const nodemailer = require('nodemailer');
-    nodemailer.createTransport.mockImplementation(() => ({
-      sendMail: jest.fn().mockRejectedValue(new Error('Error sending email'))
-    }));
-
-    const response = await request(app)
-      .post('/api/waitlist')
-      .send({ email: 'test@example.com' });
-    expect(response.status).toBe(500);
-    expect(response.body.message).toEqual('Error: Error sending email.');
-  });
+    test('should validate SMTP response', async () => {
+        const response = await sendEmail({
+            to: 'test@example.com',
+            subject: 'SMTP Test',
+            text: 'Testing SMTP response.'
+        });
+        expect(response.envelope).toBeDefined();
+        expect(response.envelope.to).toContain('test@example.com');
+    });
 });
