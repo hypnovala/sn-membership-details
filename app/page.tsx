@@ -376,7 +376,7 @@ export default function Page() {
                 <figure className="flex aspect-[4/5] items-center justify-center rounded-[1.5rem] border border-white/10 bg-[#46357d] text-center">
                   <figcaption className="max-w-sm px-6 text-white/90">
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-pink-100/90">App preview</p>
-                    <h4 className="mt-4 text-2xl font-semibold leading-tight md:text-3xl">Image placeholder</h4>
+                    <h4 className="mt-4 text-2xl font-semibold leading-tight md:text-3xl">image01_app.png</h4>
                     <p className="mt-4 text-base leading-7 text-white/80 md:text-lg">
                       Upload your Brock Somatic Check-In App screenshot to replace this preview block.
                     </p>
