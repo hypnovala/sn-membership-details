@@ -56,14 +56,14 @@ export default function Page() {
 
   const sessions = [
     {
-      name: 'Alpha Session',
+      name: 'Alpha Session (60, 90, 120 minutes)',
       price: '$189',
       description: 'Regulates the nervous system',
       focus: 'calming, downshifting, safety',
       experience: 'gentle, rhythmic, restorative',
     },
     {
-      name: 'Omega Session',
+      name: 'Omega Session (90 minutes)',
       price: '$225',
       description: 'Releases stored tension in the body',
       focus: 'depth, structure, physical reset',
